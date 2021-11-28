@@ -10,15 +10,17 @@ RUN ["npm", "install", "-g", "npm@7.24.2"]
 
 # Установка зависимостей
 COPY package*.json ./
-RUN npm install
 # Для использования в продакшне
-# RUN npm install --production
+RUN npm install --production
 
 # Копирование файлов проекта
 COPY . .
+
+# Собираем приложение
+RUN npm run build
 
 # Уведомление о порте, который будет прослушивать работающее приложение
 EXPOSE 8081
 
 # Запуск проекта
-CMD npm run start:dev
+CMD npm run start:prod
