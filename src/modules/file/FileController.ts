@@ -1,0 +1,50 @@
+import { Controller, Delete, Get, HttpException, NotFoundException, Param, Patch, Post, Req, UploadedFile, UploadedFiles, UseInterceptors } from "@nestjs/common";
+import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
+import { Crud, CrudController } from "@nestjsx/crud";
+import { FileService } from "./FileService";
+import { File } from "./File";
+import { FileInterceptor, FilesInterceptor } from "@nestjs/platform-express";
+import { ApiMultiFile } from "#common/decorators/ApiMultiFile";
+
+@Controller("/files")
+@Crud({
+	model: {
+		type: File,
+	},
+	routes: {
+		only: [
+			"getManyBase",
+			"getOneBase",
+		],
+	},
+})
+@ApiTags("Файлы")
+export class FileController implements CrudController<File> {
+	constructor (
+		public service: FileService,
+	) {}
+
+	@Post()
+	@UseInterceptors(FilesInterceptor("files"))
+	@ApiConsumes("multipart/form-data")
+	@ApiMultiFile("files")
+	uploadFiles(@UploadedFiles() files: Array<Express.Multer.File>, @Req() req): Promise<Promise<File>[]> {
+		return this.service.createAndSaveMany(files);
+	}
+	
+	@Patch(":id")
+	@UseInterceptors(FileInterceptor("file"))
+	@ApiConsumes("multipart/form-data")
+	@ApiMultiFile("file")
+	updateFile(
+		@Param("id") id: number,
+		@UploadedFile() file: Express.Multer.File
+	): Promise<File> {
+		return this.service.updateOneFile(id, file);
+	}
+
+	@Delete(":id")
+	deleteOneFile(@Param("id") id: number): Promise<File> {
+		return this.service.deleteOneFile(id);
+	}
+}
