@@ -11,7 +11,7 @@ RUN ["npm", "install", "-g", "npm@7.24.2"]
 # Установка зависимостей
 COPY package*.json ./
 # Для использования в продакшне
-RUN npm install --production
+RUN npm install
 
 # Копирование файлов проекта
 COPY . .
