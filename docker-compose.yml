@@ -88,8 +88,8 @@ services:
     volumes:
       - .:/app
     depends_on:
-      - nginx
       - db
+      - nginx
 
 networks:
   default:
