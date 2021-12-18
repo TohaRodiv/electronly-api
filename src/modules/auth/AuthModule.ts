@@ -8,6 +8,7 @@ import { JwtAuthGuard } from "../../common/guards/JwtAuthGuard";
 import { JwtStrategy } from "./strategies/JwtStrategy";
 import { ConfigModule } from "#modules/config/ConfigModule";
 import { ConfigService } from "#modules/config/ConfigService";
+import { EncryptionModule } from "#modules/encryption/EncryptionModule";
 
 @Module({
 	imports: [
@@ -26,6 +27,7 @@ import { ConfigService } from "#modules/config/ConfigService";
 				}
 			})
 		}),
+		EncryptionModule,
 	],
 	exports: [
 		PassportModule.register({

@@ -1,3 +1,4 @@
+import { EncryptionModule } from "#modules/encryption/EncryptionModule";
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { User } from "./User";
@@ -6,7 +7,8 @@ import { UserService } from "./UserService";
 
 @Module({
 	imports: [
-		TypeOrmModule.forFeature([User])
+		TypeOrmModule.forFeature([User]),
+		EncryptionModule,
 	],
 	exports: [
 		UserService,

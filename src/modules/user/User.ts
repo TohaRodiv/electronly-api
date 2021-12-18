@@ -9,13 +9,13 @@ export class User extends BaseEntity {
 	@IsNumber()
 	id: number;
 
-	@ApiProperty({ title: "Имя", })
-	@Column()
+	@ApiProperty({ title: "Логин", })
+	@Column({ unique: true })
 	@IsString()
 	name: string;
 
 	@ApiProperty({ title: "E-mail", })
-	@Column()
+	@Column({ unique: true })
 	@IsEmail()
 	email: string;
 

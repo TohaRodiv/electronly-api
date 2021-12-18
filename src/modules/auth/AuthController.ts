@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Body, Controller, Get, Post, Request, UseGuards } from "@nestjs/common";
 import { AuthService } from "./AuthService";
 import { loginPayload } from "./dto/loginPayload";
@@ -8,7 +6,7 @@ import { TJwtToken } from "./types/TJwtToken";
 import { ApiTags } from "@nestjs/swagger";
 
 @Controller("/auth")
-@ApiTags("Auth")
+@ApiTags("Авторизация")
 export class AuthController {
 	constructor(
 		private readonly authService: AuthService,
@@ -22,7 +20,9 @@ export class AuthController {
 
 	@UseGuards(JwtAuthGuard)
 	@Get("/profile")
-	async getProfile(@Request() req: Request & {user: any}): Promise<string> {
-		return req.user;
+	async getProfile(@Request() req: Request & {user: any}): Promise<any> {
+		return {
+			user: req.user,
+		};
 	}
 }
