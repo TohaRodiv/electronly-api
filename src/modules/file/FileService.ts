@@ -67,7 +67,6 @@ export class FileService extends TypeOrmCrudService<File> {
 	}
 
 	protected setFieldsFile(dto: Express.Multer.File, file: File): File {
-		console.log(dto);
 		file.path = `${this.configService.fileStorage.uploadDir}/${dto.filename}`;
 		file.mimetype = dto.mimetype;
 		file.size = dto.size;
