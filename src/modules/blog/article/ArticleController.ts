@@ -1,4 +1,5 @@
-import { Controller } from "@nestjs/common";
+import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
+import { Controller, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
 import { Article } from "./Article";
@@ -29,6 +30,7 @@ import { UpdateArticleDTO } from "./dto/UpdateArticleDTO";
 	}
 })
 @ApiTags("Материалы блога")
+@UseGuards(JwtAuthGuard)
 export class ArticleController implements CrudController<Article> {
 	constructor(
 		public service: ArticleService,

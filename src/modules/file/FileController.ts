@@ -1,10 +1,11 @@
-import { Controller, Delete, Get, HttpException, NotFoundException, Param, Patch, Post, Req, UploadedFile, UploadedFiles, UseInterceptors } from "@nestjs/common";
-import { ApiBody, ApiConsumes, ApiTags } from "@nestjs/swagger";
+import { Controller, Delete, Param, Patch, Post, Req, UploadedFile, UploadedFiles, UseGuards, UseInterceptors } from "@nestjs/common";
+import { ApiConsumes, ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
 import { FileService } from "./FileService";
 import { File } from "./File";
 import { FileInterceptor, FilesInterceptor } from "@nestjs/platform-express";
 import { ApiMultiFile } from "#common/decorators/ApiMultiFile";
+import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
 
 @Controller("/files")
 @Crud({
@@ -19,6 +20,7 @@ import { ApiMultiFile } from "#common/decorators/ApiMultiFile";
 	},
 })
 @ApiTags("Файлы")
+@UseGuards(JwtAuthGuard)
 export class FileController implements CrudController<File> {
 	constructor (
 		public service: FileService,

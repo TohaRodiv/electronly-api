@@ -1,4 +1,5 @@
-import { Body, Controller, Param, Patch, Post } from "@nestjs/common";
+import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
+import { Body, Controller, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
 import { BlogCategory } from "./BlogCategory";
@@ -34,6 +35,7 @@ import { BlogUpdateCategoryDTO } from "./dto/BlogUpdateCategoryDTO";
 	}
 })
 @ApiTags("Категории блога")
+@UseGuards(JwtAuthGuard)
 export class CategoryController implements CrudController<BlogCategory> {
 	constructor(
 		public service: CategoryService,

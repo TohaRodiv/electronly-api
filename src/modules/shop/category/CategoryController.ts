@@ -1,10 +1,11 @@
 import { CategoryService } from "./CategoryService";
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
 import { ShopCategory } from "./ShopCategory";
 import { ShopCreateCategoryDTO } from "./dto/ShopCreateCategoryDTO";
 import { ShopUpdateCategoryDTO } from "./dto/ShopUpdateCategoryDTO";
+import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
 
 @Controller("/shop/categories")
 @Crud({
@@ -29,6 +30,7 @@ import { ShopUpdateCategoryDTO } from "./dto/ShopUpdateCategoryDTO";
 	}
 })
 @ApiTags("Категории магазина")
+@UseGuards(JwtAuthGuard)
 export class CategoryController implements CrudController<ShopCategory> {
 	constructor(
 		public service: CategoryService,

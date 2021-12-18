@@ -1,4 +1,5 @@
-import { Controller } from "@nestjs/common";
+import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
+import { Controller, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
 import { CreateStatusOrderDTO } from "./dto/CreateStatusOrderDTO";
@@ -29,6 +30,7 @@ import { StatusOrderService } from "./StatusOrderService";
 	}
 })
 @ApiTags("Статусы заказов")
+@UseGuards(JwtAuthGuard)
 export class StatusOrderController implements CrudController<StatusOrder> {
 	constructor(
 		public service: StatusOrderService,

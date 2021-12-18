@@ -1,4 +1,5 @@
-import { Controller } from "@nestjs/common";
+import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
+import { Controller, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
 import { Banner } from "./Banner";
@@ -22,6 +23,7 @@ import { UpdateBannerDTO } from "./dto/UpdateBannerDTO";
 	}
 })
 @ApiTags("Баннера")
+@UseGuards(JwtAuthGuard)
 export class BannerController implements CrudController<Banner> {
 	constructor(
 		public service: BannerService,

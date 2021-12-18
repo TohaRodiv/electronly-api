@@ -1,6 +1,7 @@
 
+import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
 import { FileService } from "#modules/file/FileService";
-import { Body, Controller, Param, Patch, Post, } from "@nestjs/common";
+import { Body, Controller, Param, Patch, Post, UseGuards, } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController, } from "@nestjsx/crud";
 import { CreateProductDTO } from "./dto/CreateProductDTO";
@@ -43,6 +44,7 @@ import { ProductService } from "./ProductService";
 	}
 })
 @ApiTags("Товары")
+@UseGuards(JwtAuthGuard)
 export class ProductController implements CrudController<Product> {
 	constructor(
 		public readonly service: ProductService,
