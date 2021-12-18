@@ -87,3 +87,6 @@ services:
       dockerfile: ./deploy/app/Dockerfile
     volumes:
       - .:/app
+    depends_on:
+      - db
+      - server
