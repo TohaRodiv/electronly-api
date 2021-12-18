@@ -24,7 +24,7 @@ export class AuthService {
 			}
 		});
 
-		if (user && this.encryptionService.compare(password, user.password)) {
+		if (user && await this.encryptionService.compare(password, user.password)) {
 			return user;
 		} else {
 			throw new UnauthorizedException(`User ${username} not found or password is invalid!`);
