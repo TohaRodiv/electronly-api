@@ -2,7 +2,7 @@ import { ConfigService } from "#modules/config/ConfigService";
 import { Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
-import { join as pathJoin, basename } from "path";
+import { basename } from "path";
 import { Repository } from "typeorm";
 import { File } from "./File";
 import { promises as fs } from "fs";
@@ -67,7 +67,8 @@ export class FileService extends TypeOrmCrudService<File> {
 	}
 
 	protected setFieldsFile(dto: Express.Multer.File, file: File): File {
-		file.path = pathJoin(this.configService.fileStorage.uploadDir, dto.filename);
+		console.log(dto);
+		file.path = `${this.configService.fileStorage.uploadDir}/${dto.filename}`;
 		file.mimetype = dto.mimetype;
 		file.size = dto.size;
 
@@ -76,7 +77,7 @@ export class FileService extends TypeOrmCrudService<File> {
 
 	protected async deleteFile(filename: string): Promise<void> {
 		try {
-			await fs.unlink(pathJoin(this.configService.fileStorage.destination, filename));
+			await fs.unlink(`${this.configService.fileStorage.destination}/${filename}`);
 		} catch (err) {
 			// throw new NotFoundException(`Cannot remove file ${filename}, error: ${err.message}`);
 			// TODO: Добавить логирование для ошибок удаления
