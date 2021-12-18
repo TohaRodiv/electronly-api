@@ -1,7 +1,7 @@
 import { Product } from "#modules/shop/product/Product";
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
 import { IsNumber, IsString } from "class-validator";
-import { BaseEntity, Column, Entity, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({ name: "files" })
 export class File extends BaseEntity {

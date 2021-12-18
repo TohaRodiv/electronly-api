@@ -5,7 +5,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsPhoneNumber, IsEmail, IsOptional, Validate, IsNumber } from "class-validator";
 
 export class CreateOrderDTO {
-	@ApiProperty({ title: "ФИО", required: true, })
+	@ApiProperty({ title: "ФИО", required: true, minLength: 3, })
 	@IsString()
 	fio: string;
 
@@ -25,6 +25,7 @@ export class CreateOrderDTO {
 
 	@ApiProperty({ title: "Товары", type: () => [Product], required: false,})
 	@Validate(ArrayItemNumberValidator)
+	@IsOptional()
 	products?: number[];
 
 	@ApiProperty({ title: "Статус", type: () => StatusOrder, required: true, })

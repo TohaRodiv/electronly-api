@@ -1,7 +1,7 @@
 import { File } from "#modules/file/File";
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
 import { IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
-import { BaseEntity, Column, Entity, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ShopCategory } from "../category/ShopCategory";
 
 @Entity({ name: "products" })
@@ -21,14 +21,6 @@ export class Product extends BaseEntity {
 	@IsOptional()
 	@IsString()
 	description: string;
-
-	/**
-	 * @deprecated
-	 */
-	@ApiProperty({ title: "Изображение", deprecated: true, format: "url", })
-	@Column({ default: null, })
-	@IsString()
-	image: string;
 
 	@ApiProperty({ title: "Цена", })
 	@Column({ default: null, })
@@ -51,7 +43,7 @@ export class Product extends BaseEntity {
 	@ManyToOne(() => ShopCategory, category => category.products)
 	category: ShopCategory;
 
-	@ApiProperty({ title: "Изображения", type: () => [File],})
+	@ApiProperty({ title: "Изображения", type: () => [File], format: "images", })
 	@OneToMany(() => File, file => file.product)
 	images: File[];
 }

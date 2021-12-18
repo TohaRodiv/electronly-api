@@ -32,7 +32,7 @@ export class CreateProductDTO {
 	@ApiProperty({ title: "Категория", type: () => ShopCategory, required: true, })
 	category: number;
 
-	@ApiProperty({ title: "Изображения", type: () => [File], required: false,})
+	@ApiProperty({ title: "Изображения", type: () => [File], required: false, format: "images", })
 	@Validate(ArrayItemNumberValidator)
 	images: number[];
 }
