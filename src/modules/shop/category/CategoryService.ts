@@ -12,8 +12,4 @@ export class CategoryService extends TypeOrmCrudService<ShopCategory> {
 	) {
 		super(repo);
 	}
-
-	public async getCats(): Promise<ShopCategory[]> {
-		return await this.repo.query("SELECT * from `shop-categories`");
-	}
 }

@@ -1,5 +1,5 @@
 import { CategoryService } from "./CategoryService";
-import { Controller, Get, UseGuards } from "@nestjs/common";
+import { Controller, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
 import { ShopCategory } from "./ShopCategory";
