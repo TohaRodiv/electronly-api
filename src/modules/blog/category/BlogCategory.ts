@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
-import { IsBoolean, IsNumber, IsString } from "class-validator";
+import { IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Article } from "../article/Article";
 
@@ -22,5 +22,6 @@ export class BlogCategory extends BaseEntity {
 	
 	@ApiProperty({ title: "Материалы", type: () => [Article], })
 	@OneToMany(() => Article, article => article.category)
+	@IsOptional()
 	articles: Article[];
 }
