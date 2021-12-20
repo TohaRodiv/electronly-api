@@ -1,7 +1,7 @@
 import { extname, join as pathJoin } from "path";
 import { v4 as uuidv4 } from "uuid";
 
-const uploadDir = pathJoin(process.env.UPLOAD_DIR);
+const uploadDir = pathJoin(process.env.UPLOAD_DIR || "upload");
 
 export const FileStorageConfig = {
 	uploadDir,
