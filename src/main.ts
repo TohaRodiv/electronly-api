@@ -22,9 +22,9 @@ import { NestExpressApplication } from "@nestjs/platform-express";
 	/**
 	 * TODO: Путь до папки upload брать из config-сервиса
 	 */
-	app.useStaticAssets(joinPath(process.cwd(), "upload"));
-	app.use('/upload', staticExpress(joinPath(process.cwd(), 'upload')));
-	app.useStaticAssets(joinPath(process.cwd(), "upload"));
+	app.useStaticAssets(configService.fileStorage.destination);
+	app.use(configService.fileStorage.webUploadPath, staticExpress(configService.fileStorage.destination));
+	app.useStaticAssets(configService.fileStorage.destination);
 
 
 	app.useGlobalPipes(new ValidationPipe());

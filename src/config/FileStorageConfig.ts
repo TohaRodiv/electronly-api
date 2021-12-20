@@ -1,5 +1,5 @@
 import { extname, join as pathJoin } from "path";
-import { v4 as uuidv4 } from "uuid";	
+import { v4 as uuidv4 } from "uuid";
 
 const uploadDir = pathJoin("upload");
 
@@ -11,4 +11,5 @@ export const FileStorageConfig = {
 	},
 	getFileName: (file: Express.Multer.File): string =>
 		`${uuidv4()}${extname(file.originalname)}`,
+	webUploadPath: "/upload",
 };
