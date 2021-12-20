@@ -10,6 +10,8 @@ export class BlogCreateCategoryDTO {
 
 	@ApiProperty({ title: "Активно", required: false, default: true, })
 	@IsBoolean()
+	@IsOptional()
+	
 	active: boolean;
 	
 	@ApiProperty({ title: "Материалы", type: () => [Article], required: false, })

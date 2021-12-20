@@ -34,5 +34,6 @@ export class CreateProductDTO {
 
 	@ApiProperty({ title: "Изображения", type: () => [File], required: false, format: "images", })
 	@Validate(ArrayItemNumberValidator)
+	@IsOptional()
 	images: number[];
 }
