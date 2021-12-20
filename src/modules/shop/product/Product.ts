@@ -1,7 +1,7 @@
 import { File } from "#modules/file/File";
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
 import { IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
-import { BaseEntity, Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ShopCategory } from "../category/ShopCategory";
 
 @Entity({ name: "products" })
@@ -44,6 +44,7 @@ export class Product extends BaseEntity {
 	category: ShopCategory;
 
 	@ApiProperty({ title: "Изображения", type: () => [File], format: "images", })
-	@OneToMany(() => File, file => file.product)
+	@ManyToMany(() => File)
+	@JoinTable()
 	images: File[];
 }

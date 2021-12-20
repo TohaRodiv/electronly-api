@@ -24,8 +24,4 @@ export class File extends BaseEntity {
 	@IsNumber()
 	@ApiProperty({ title: "Размер" })
 	size: number;
-
-	@ApiProperty({ title: "Товары", type: () => Product, })
-	@ManyToOne(() => Product, product => product.images)
-	product: Product;
 }
