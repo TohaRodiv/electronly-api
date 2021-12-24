@@ -22,7 +22,7 @@ export class CreateArticleDTO {
 	@ApiProperty({ title: "Категория", type: () => BlogCategory, required: true, })
 	category: number;
 
-	@ApiProperty({ title: "Основное изображение", type: () => [File], required: false, format: "images", })
+	@ApiProperty({ title: "Основное изображение", type: () => [File], required: false, format: "image", })
 	@Validate(ArrayItemNumberValidator)
 	@IsOptional()
 	images: number[];

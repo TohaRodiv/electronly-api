@@ -30,7 +30,7 @@ export class Article extends BaseEntity {
 	@ManyToOne(() => BlogCategory, category => category.articles)
 	category: BlogCategory;
 
-	@ApiProperty({ title: "Основное изображение", type: () => [File], format: "images", })
+	@ApiProperty({ title: "Основное изображение", type: () => [File], format: "image", })
 	@ManyToMany(() => File)
 	@JoinTable()
 	images: File[];

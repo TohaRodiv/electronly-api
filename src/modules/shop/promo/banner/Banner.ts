@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
 import { IsBoolean, IsNumber, IsString } from "class-validator";
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { File } from "#modules/file/File";
 
 @Entity({ name: "banners" })
 export class Banner extends BaseEntity {
@@ -19,13 +20,18 @@ export class Banner extends BaseEntity {
 	@IsString()
 	subtitle: string;
 
-	@ApiProperty({ title: "Изображение", })
-	@Column()
-	@IsString()
-	image: string;
+	// @ApiProperty({ title: "Изображение", })
+	// @Column()
+	// @IsString()
+	// image: string;
 
 	@ApiProperty({ title: "Активен", })
 	@Column({default: false})
 	@IsBoolean()
 	active: boolean;
+
+	@ApiProperty({ title: "Изображение", type: () => File, format: "image", })
+	@ManyToMany(() => File)
+	@JoinTable()
+	image: File;
 }

@@ -1,5 +1,6 @@
+import { File } from "#modules/file/File";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsBoolean } from "class-validator";
+import { IsString, IsBoolean, IsNumber } from "class-validator";
 
 export class CreateBannerDTO {
 	@ApiProperty({ title: "Название", required: true, })
@@ -10,9 +11,9 @@ export class CreateBannerDTO {
 	@IsString()
 	subtitle: string;
 
-	@ApiProperty({ title: "Изображение", required: true, })
-	@IsString()
-	image: string;
+	@ApiProperty({ title: "Изображение", required: true, type: () => File, format: "image", })
+	@IsNumber()
+	image: number;
 
 	@ApiProperty({ title: "Активен", required: false, default: false, })
 	@IsBoolean()

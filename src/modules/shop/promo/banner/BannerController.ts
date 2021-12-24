@@ -1,5 +1,5 @@
 import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
-import { Controller, UseGuards } from "@nestjs/common";
+import { Body, Controller, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
 import { Banner } from "./Banner";
@@ -16,6 +16,11 @@ import { UpdateBannerDTO } from "./dto/UpdateBannerDTO";
 		deleteOneBase: {
 			returnDeleted: true,
 		},
+		only: [
+			"deleteOneBase",
+			"getManyBase",
+			"getOneBase",
+		],
 	},
 	dto: {
 		create: CreateBannerDTO,
@@ -28,4 +33,17 @@ export class BannerController implements CrudController<Banner> {
 	constructor(
 		public service: BannerService,
 	) {}
+
+	@Post()
+	public async createAndSave(@Body() dto: CreateBannerDTO): Promise<Banner> {
+		return await this.service.createAndSave(dto);
+	}
+
+	@Patch(":id")
+	public async udpate(
+		@Param("id") id: number,
+		@Body() dto: UpdateBannerDTO,
+	): Promise<Banner> {
+		return await this.service.update(id, dto);
+	}
 }
