@@ -44,4 +44,7 @@ export const DatabaseConfig: TypeOrmModuleOptions = {
 	}
 };
 
-export default DatabaseConfig;
+export default {
+	...DatabaseConfig,
+	host: "localhost",
+};
