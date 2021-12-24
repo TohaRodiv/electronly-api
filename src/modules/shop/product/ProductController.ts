@@ -1,4 +1,3 @@
-
 import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
 import { FileService } from "#modules/file/FileService";
 import { Body, Controller, Param, Patch, Post, UseGuards, } from "@nestjs/common";
@@ -48,7 +47,6 @@ import { ProductService } from "./ProductService";
 export class ProductController implements CrudController<Product> {
 	constructor(
 		public readonly service: ProductService,
-		protected readonly fileService: FileService,
 	) { }
 
 	@Post()
