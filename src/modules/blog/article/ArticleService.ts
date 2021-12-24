@@ -1,5 +1,5 @@
 import { FileService } from "#modules/file/FileService";
-import { Inject, Injectable } from "@nestjs/common";
+import { forwardRef, Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { Repository } from "typeorm";
@@ -14,7 +14,8 @@ export class ArticleService extends TypeOrmCrudService<Article> {
 		@InjectRepository(Article)
 		protected readonly repo: Repository<Article>,
 
-		@Inject(CategoryService) protected readonly categoryService: CategoryService,
+		@Inject(forwardRef(() => CategoryService))
+		protected readonly categoryService: CategoryService,
 
 		@Inject(FileService)
 		protected readonly fileService: FileService,
