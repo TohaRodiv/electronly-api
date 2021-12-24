@@ -46,5 +46,5 @@ export const DatabaseConfig: TypeOrmModuleOptions = {
 
 export default {
 	...DatabaseConfig,
-	url: `postgres://postgres@localhost:${DatabaseConfig.port}/${DatabaseConfig.database}`
+	url: `postgres://postgres@${DatabaseConfig.host}:${DatabaseConfig.port}/${DatabaseConfig.database}`
 };
