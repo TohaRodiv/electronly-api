@@ -19,9 +19,5 @@ COPY . .
 # Собираем приложение
 RUN npm run build
 
-RUN npx ts-node ./node_modules/typeorm/cli -f ./dist/config/DatabaseConfig.js migration:create -n AddRelationFilesToArticle
-# RUN npx ts-node ./node_modules/typeorm/cli -f ./dist/config/DatabaseConfig.js migration:generate --name AddRelationFilesToArticle
-RUN npx ts-node ./node_modules/typeorm/cli -f ./dist/config/DatabaseConfig.js migration:run
-
 # Запуск проекта
 CMD npm run start:prod
