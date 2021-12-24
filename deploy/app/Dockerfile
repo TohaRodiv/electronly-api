@@ -19,7 +19,7 @@ COPY . .
 # Собираем приложение
 RUN npm run build
 
-RUN npm run typeorm migration:generate -n 
+RUN npm run typeorm migration:generate -n AddRelationFilesToArticle
 RUN npm run typeorm migration:run
 
 # Запуск проекта
