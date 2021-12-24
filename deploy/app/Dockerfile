@@ -19,5 +19,8 @@ COPY . .
 # Собираем приложение
 RUN npm run build
 
+RUN npm run typeorm migration:generate -n 
+RUN npm run typeorm migration:run
+
 # Запуск проекта
 CMD npm run start:prod

@@ -30,5 +30,5 @@ export const DatabaseConfig: TypeOrmModuleOptions = {
 		// ProductImage,
 		File,
 	],
-	synchronize: true,
+	synchronize: false,
 };
