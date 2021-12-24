@@ -10,6 +10,9 @@ import { ArticleModule } from "../article/ArticleModule";
 		TypeOrmModule.forFeature([BlogCategory]),
 		ArticleModule,
 	],
+	exports: [
+		CategoryService,
+	],
 	providers: [
 		CategoryService,
 	],
