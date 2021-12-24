@@ -13,11 +13,11 @@ import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 
 export const DatabaseConfig: TypeOrmModuleOptions = {
 	type: "postgres",
-	host: process.env.DB_HOST 			|| "localhost",
-	port: +process.env.DB_PORT 			|| 3306,
-	username: process.env.DB_USER 		|| "root",
-	password: process.env.DB_PASSWORD 	|| "password",
-	database: process.env.DB_NAME 		|| "electronly",
+	host: process.env.DB_HOST || "localhost",
+	port: +process.env.DB_PORT || 3306,
+	username: process.env.DB_USER || "root",
+	password: process.env.DB_PASSWORD || "password",
+	database: process.env.DB_NAME || "electronly",
 	entities: [
 		User,
 		Article,
@@ -31,4 +31,17 @@ export const DatabaseConfig: TypeOrmModuleOptions = {
 		File,
 	],
 	synchronize: false,
+	migrations: [
+		"src/migration/**/*.ts"
+	],
+	subscribers: [
+		"src/subscriber/**/*.ts"
+	],
+	cli: {
+		entitiesDir: "src/",
+		migrationsDir: "src/migration",
+		subscribersDir: "src/subscriber"
+	}
 };
+
+export default DatabaseConfig;
