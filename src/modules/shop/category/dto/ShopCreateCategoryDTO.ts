@@ -22,5 +22,5 @@ export class ShopCreateCategoryDTO {
 	@ApiProperty({ title: "Изображение", type: () => [File], required: false, format: "image", })
 	@IsOptional()
 	@Validate(ArrayItemNumberValidator)
-	images: number[]
+	images: number[];
 }

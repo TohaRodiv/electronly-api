@@ -28,5 +28,5 @@ export class ShopCategory extends BaseEntity {
 	@ApiProperty({ title: "Изображение", type: () => [File], format: "image", required: false, })
 	@ManyToMany(() => File)
 	@JoinTable()
-	images: File[]
+	images: File[];
 }
