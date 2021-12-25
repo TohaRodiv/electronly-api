@@ -1,5 +1,5 @@
 import { FileService } from "#modules/file/FileService";
-import { Inject, Injectable } from "@nestjs/common";
+import { forwardRef, Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
 import { Repository } from "typeorm";
@@ -14,7 +14,7 @@ export class ProductService extends TypeOrmCrudService<Product> {
 		@InjectRepository(Product)
 		protected repo: Repository<Product>,
 		
-		@Inject(CategoryService)
+		@Inject(forwardRef(() => CategoryService))
 		protected categoryService: CategoryService,
 
 		@Inject(FileService)

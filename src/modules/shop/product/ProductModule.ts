@@ -1,5 +1,5 @@
 import { FileModule } from "#modules/file/FileModule";
-import { Module } from "@nestjs/common";
+import { forwardRef, Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { CategoryModule } from "../category/CategoryModule";
 import { Product } from "./Product";
@@ -10,7 +10,7 @@ import { ProductService } from "./ProductService";
 	imports: [
 		TypeOrmModule.forFeature([Product]),
 		FileModule,
-		CategoryModule,
+		forwardRef(() => CategoryModule),
 	],
 	exports: [
 		ProductService,

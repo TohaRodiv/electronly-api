@@ -9,6 +9,7 @@ export class ShopCreateCategoryDTO {
 	title: string;
 
 	@ApiProperty({ title: "Активно", default: true, required: false, })
+	@IsOptional()
 	@IsBoolean()
 	active: boolean;
 
@@ -16,4 +17,9 @@ export class ShopCreateCategoryDTO {
 	@Validate(ArrayItemNumberValidator)
 	@IsOptional()
 	products: number[];
+
+	@ApiProperty({ title: "Изображение", type: () => [Product], required: false, format: "image", })
+	@IsOptional()
+	@Validate(ArrayItemNumberValidator)
+	images: number[]
 }
