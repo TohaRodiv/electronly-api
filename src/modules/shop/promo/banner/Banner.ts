@@ -28,5 +28,5 @@ export class Banner extends BaseEntity {
 	@ApiProperty({ title: "Изображение", type: () => [File], format: "image", })
 	@ManyToMany(() => File)
 	@JoinTable()
-	images: File;
+	images: File[];
 }

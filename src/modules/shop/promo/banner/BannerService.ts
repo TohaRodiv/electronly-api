@@ -28,7 +28,7 @@ export class BannerService extends TypeOrmCrudService<Banner> {
 		const banner = this.repo.create(fields);
 
 		if (images) {
-			banner.images = await this.fileService.findOne(images);
+			banner.images = await this.fileService.findByIds(images);
 		}
 
 		return await this.repo.save(banner);
@@ -49,7 +49,7 @@ export class BannerService extends TypeOrmCrudService<Banner> {
 		}
 
 		if (images) {
-			banner.images= await this.fileService.findOne(images);
+			banner.images = await this.fileService.findByIds(images);
 		}
 
 		return await this.repo.save(banner);
