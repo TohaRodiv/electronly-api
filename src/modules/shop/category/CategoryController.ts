@@ -17,6 +17,9 @@ import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
 			products: {
 				eager: true,
 			},
+			iamges: {
+				eager: true,
+			}
 		}
 	},
 	routes: {
