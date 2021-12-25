@@ -2,6 +2,7 @@ import { ArrayItemNumberValidator } from "#common/validators/ArrayItemNumberVali
 import { Article } from "#modules/blog/article/Article";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsOptional, IsString, Validate } from "class-validator";
+import { File } from "#modules/file/File";
 
 export class BlogCreateCategoryDTO {
 	@ApiProperty({ title: "Название", required: true, })
