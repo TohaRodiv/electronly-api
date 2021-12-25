@@ -1,3 +1,4 @@
+import { FileService } from "#modules/file/FileService";
 import { Inject, Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { TypeOrmCrudService } from "@nestjsx/crud-typeorm";
@@ -15,6 +16,9 @@ export class CategoryService extends TypeOrmCrudService<BlogCategory> {
 
 		@Inject(ArticleService)
 		protected articleService: ArticleService,
+
+		@Inject(FileService)
+		protected readonly fileService: FileService,
 	) {
 		super(repo);
 	}
@@ -22,6 +26,7 @@ export class CategoryService extends TypeOrmCrudService<BlogCategory> {
 	public async createAndSave(dto: BlogCreateCategoryDTO): Promise<BlogCategory> {
 		const {
 			articles,
+			images,
 			...fields
 		} = dto;
 
@@ -31,12 +36,17 @@ export class CategoryService extends TypeOrmCrudService<BlogCategory> {
 			category.articles = await this.articleService.findByIds(articles);
 		}
 
+		if (images) {
+			category.images = await this.fileService.findByIds(images);
+		}
+
 		return await this.repo.save(category);
 	}
 
 	public async update(id: number, dto: BlogUpdateCategoryDTO): Promise<BlogCategory> {
 		const {
 			articles,
+			images,
 			...fields
 		} = dto;
 
@@ -50,6 +60,10 @@ export class CategoryService extends TypeOrmCrudService<BlogCategory> {
 
 		if (articles) {
 			category.articles = await this.articleService.findByIds(articles);
+		}
+
+		if (images) {
+			category.images = await this.fileService.findByIds(images);
 		}
 
 		return await this.repo.save(category);

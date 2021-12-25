@@ -1,7 +1,8 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
 import { IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToMany, } from "typeorm";
 import { Article } from "../article/Article";
+import { File } from "#modules/file/File";
 
 @Entity({ name: "blog-categories" })
 export class BlogCategory extends BaseEntity {
@@ -19,9 +20,13 @@ export class BlogCategory extends BaseEntity {
 	@Column({ default: true, })
 	@IsBoolean()
 	active: boolean;
-	
+
 	@ApiProperty({ title: "Материалы", type: () => [Article], })
 	@OneToMany(() => Article, article => article.category)
 	@IsOptional()
 	articles: Article[];
+
+	@ApiProperty({ title: "Изображение", type: () => [File], format: "image", required: false, })
+	@ManyToMany(() => File)
+	images: File[]
 }

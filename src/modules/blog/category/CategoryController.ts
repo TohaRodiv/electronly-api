@@ -17,6 +17,9 @@ import { BlogUpdateCategoryDTO } from "./dto/BlogUpdateCategoryDTO";
 			articles: {
 				eager: true,
 			},
+			images: {
+				eager: true,
+			}
 		}
 	},
 	routes: {
