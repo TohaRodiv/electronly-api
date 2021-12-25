@@ -5,7 +5,6 @@ import { AppModule } from "#modules/app/AppModule";
 import { ConfigService } from "#modules/config/ConfigService";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { ValidationPipe } from "@nestjs/common";
-import { join as joinPath } from "path";
 import { static as staticExpress } from "express";
 import { NestExpressApplication } from "@nestjs/platform-express";
 

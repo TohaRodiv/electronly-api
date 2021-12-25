@@ -19,7 +19,6 @@ export const DatabaseConfig: TypeOrmModuleOptions = {
 	password: process.env.DB_PASSWORD,
 	database: process.env.DB_NAME,
 	synchronize: false,
-	migrationsRun: true,
 	entities: [
 		User,
 		Article,
@@ -41,7 +40,4 @@ export const DatabaseConfig: TypeOrmModuleOptions = {
 	}
 };
 
-export default {
-	...DatabaseConfig,
-	host: "localhost",
-};
+export default DatabaseConfig;
