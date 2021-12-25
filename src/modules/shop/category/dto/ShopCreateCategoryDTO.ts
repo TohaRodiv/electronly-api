@@ -1,4 +1,5 @@
 import { ArrayItemNumberValidator } from "#common/validators/ArrayItemNumberValidator";
+import { File } from "#modules/file/File";
 import { Product } from "#modules/shop/product/Product";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsBoolean, IsOptional, IsString, Validate, } from "class-validator";
@@ -18,7 +19,7 @@ export class ShopCreateCategoryDTO {
 	@IsOptional()
 	products: number[];
 
-	@ApiProperty({ title: "Изображение", type: () => [Product], required: false, format: "image", })
+	@ApiProperty({ title: "Изображение", type: () => [File], required: false, format: "image", })
 	@IsOptional()
 	@Validate(ArrayItemNumberValidator)
 	images: number[]
