@@ -36,6 +36,6 @@ lerna-debug.log*
 
 # other
 ./deploy/postgres/pg-data
-./upload/*
+upload
 .env
 deploy
