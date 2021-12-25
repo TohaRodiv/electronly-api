@@ -25,6 +25,13 @@ import { UpdateBannerDTO } from "./dto/UpdateBannerDTO";
 	dto: {
 		create: CreateBannerDTO,
 		update: UpdateBannerDTO,
+	},
+	query: {
+		join: {
+			images: {
+				eager: true,
+			}
+		}
 	}
 })
 @ApiTags("Баннера")
