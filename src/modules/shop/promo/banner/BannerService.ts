@@ -21,14 +21,14 @@ export class BannerService extends TypeOrmCrudService<Banner> {
 
 	public async createAndSave(dto: CreateBannerDTO): Promise<Banner> {
 		const {
-			image,
+			images,
 			...fields
 		} = dto;
 
 		const banner = this.repo.create(fields);
 
-		if (image) {
-			banner.image = await this.fileService.findOne(image);
+		if (images) {
+			banner.images = await this.fileService.findOne(images);
 		}
 
 		return await this.repo.save(banner);
@@ -36,7 +36,7 @@ export class BannerService extends TypeOrmCrudService<Banner> {
 
 	public async update(id: number, dto: UpdateBannerDTO): Promise<Banner> {
 		const {
-			image,
+			images,
 			...fields
 		} = dto;
 
@@ -48,8 +48,8 @@ export class BannerService extends TypeOrmCrudService<Banner> {
 			}
 		}
 
-		if (image) {
-			banner.image = await this.fileService.findOne(image);
+		if (images) {
+			banner.images= await this.fileService.findOne(images);
 		}
 
 		return await this.repo.save(banner);

@@ -11,9 +11,9 @@ export class CreateBannerDTO {
 	@IsString()
 	subtitle: string;
 
-	@ApiProperty({ title: "Изображение", required: true, type: () => File, format: "image", })
+	@ApiProperty({ title: "Изображение", required: true, type: () => [File], format: "image", })
 	@IsNumber()
-	image: number;
+	images: number;
 
 	@ApiProperty({ title: "Активен", required: false, default: false, })
 	@IsBoolean()
