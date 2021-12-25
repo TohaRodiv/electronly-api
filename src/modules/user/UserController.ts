@@ -20,7 +20,7 @@ import { UserService } from "./UserService";
 		exclude: ["createManyBase", "createOneBase", "replaceOneBase", "updateOneBase"]
 	},
 })
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class UserController implements CrudController<User> {
 	constructor(
 		public service: UserService,
