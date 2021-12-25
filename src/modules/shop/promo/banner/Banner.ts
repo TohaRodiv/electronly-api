@@ -20,11 +20,6 @@ export class Banner extends BaseEntity {
 	@IsString()
 	subtitle: string;
 
-	// @ApiProperty({ title: "Изображение", })
-	// @Column()
-	// @IsString()
-	// image: string;
-
 	@ApiProperty({ title: "Активен", })
 	@Column({default: false})
 	@IsBoolean()
