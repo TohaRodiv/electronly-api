@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjsx/crud/lib/crud";
 import { IsBoolean, IsNumber, IsOptional, IsString } from "class-validator";
-import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn, ManyToMany, } from "typeorm";
+import { BaseEntity, Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn, } from "typeorm";
 import { Article } from "../article/Article";
 import { File } from "#modules/file/File";
 
@@ -28,5 +28,6 @@ export class BlogCategory extends BaseEntity {
 
 	@ApiProperty({ title: "Изображение", type: () => [File], format: "image", required: false, })
 	@ManyToMany(() => File)
-	images: File[]
+	@JoinTable()
+	images: File[];
 }
