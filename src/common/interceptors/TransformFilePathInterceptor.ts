@@ -14,20 +14,27 @@ const hostname = process.env.DOMAIN_NAME;
 @Injectable()
 export class TransformFilePathInterceptor<T> implements NestInterceptor<T, Response<T>> {
 
-	constructor (
+	constructor(
 		private readonly field: string = null,
-	) {}
+	) { }
 
-	private getFormattedFile (data: any, hostname) {
+	private getFormattedFile(data: any, hostname) {
 		return {
 			...data,
 			path: `${hostname}/${data.path}`,
 		};
 	}
 
-	private getFormattedFileByItemType (items: any) {
+	private getFormattedFileByItemType(items: any) {
 		if (this.field && this.field in items) {
 			const result = items;
+
+			if (Array.isArray(result[this.field])) {
+				result[this.field] = result[this.field].map(file => this.getFormattedFile(file, hostname));
+			} else {
+				result[this.field] = this.getFormattedFile(result[this.field], hostname);
+			}
+
 			result[this.field] = this.getFormattedFile(items[this.field], hostname);
 			return result;
 		} else {
@@ -39,7 +46,6 @@ export class TransformFilePathInterceptor<T> implements NestInterceptor<T, Respo
 		return next
 			.handle()
 			.pipe(map(data => {
-				console.log(data);
 				if (Array.isArray(data)) {
 					return data.map(items => {
 						return this.getFormattedFileByItemType(items);
