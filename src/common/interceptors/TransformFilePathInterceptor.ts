@@ -17,6 +17,7 @@ export class TransformFilePathInterceptor<T> implements NestInterceptor<T, Respo
 		return next
 			.handle()
 			.pipe(map(data => {
+				console.log(data);
 				return data.map(items => (
 					{
 						...items,
