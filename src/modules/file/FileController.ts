@@ -6,6 +6,7 @@ import { File } from "./File";
 import { FileInterceptor, FilesInterceptor } from "@nestjs/platform-express";
 import { ApiMultiFile } from "#common/decorators/ApiMultiFile";
 import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
+import { TransformFilePathInterceptor } from "#common/interceptors/TransformFilePathInterceptor";
 
 @Controller("/files")
 @Crud({
@@ -13,6 +14,12 @@ import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
 		type: File,
 	},
 	routes: {
+		getManyBase: {
+			interceptors: [new TransformFilePathInterceptor()],
+		},
+		getOneBase: {
+			interceptors: [new TransformFilePathInterceptor()],
+		},
 		only: [
 			"getManyBase",
 			"getOneBase",
@@ -22,9 +29,9 @@ import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
 @ApiTags("Файлы")
 @UseGuards(JwtAuthGuard)
 export class FileController implements CrudController<File> {
-	constructor (
+	constructor(
 		public service: FileService,
-	) {}
+	) { }
 
 	@Post()
 	@UseInterceptors(FilesInterceptor("files"))
@@ -33,7 +40,7 @@ export class FileController implements CrudController<File> {
 	uploadFiles(@UploadedFiles() files: Array<Express.Multer.File>, @Req() req): Promise<Promise<File>[]> {
 		return this.service.createAndSaveMany(files);
 	}
-	
+
 	@Patch(":id")
 	@UseInterceptors(FileInterceptor("file"))
 	@ApiConsumes("multipart/form-data")
