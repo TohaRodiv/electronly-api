@@ -6,6 +6,7 @@ import { ShopCategory } from "./ShopCategory";
 import { ShopCreateCategoryDTO } from "./dto/ShopCreateCategoryDTO";
 import { ShopUpdateCategoryDTO } from "./dto/ShopUpdateCategoryDTO";
 import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
+import { TransformFilePathInterceptor } from "#common/interceptors/TransformFilePathInterceptor";
 
 @Controller("/shop/categories")
 @Crud({
@@ -25,6 +26,13 @@ import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
 	routes: {
 		deleteOneBase: {
 			returnDeleted: true,
+		},
+
+		getManyBase: {
+			interceptors: [new TransformFilePathInterceptor("images")],
+		},
+		getOneBase: {
+			interceptors: [new TransformFilePathInterceptor("images")]
 		},
 	},
 	dto: {
