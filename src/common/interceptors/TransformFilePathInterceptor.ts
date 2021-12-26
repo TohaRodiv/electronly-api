@@ -27,7 +27,9 @@ export class TransformFilePathInterceptor<T> implements NestInterceptor<T, Respo
 
 	private getFormattedFileByItemType (items: any) {
 		if (this.field && this.field in items) {
-			return this.getFormattedFile(items[this.field], hostname)
+			const result = items;
+			result[this.field] = this.getFormattedFile(items[this.field], hostname);
+			return result;
 		} else {
 			return this.getFormattedFile(items, hostname);
 		}
