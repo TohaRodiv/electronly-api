@@ -6,7 +6,10 @@ export interface Response<T> {
 	data: T;
 }
 
-const hostname = process.env.DOMAIN_NAME || "http://localhost";
+/**
+ * @TODO: Брать имя домена из configService
+ */
+const hostname = process.env.DOMAIN_NAME;
 
 @Injectable()
 export class TransformFilePathInterceptor<T> implements NestInterceptor<T, Response<T>> {
@@ -14,8 +17,12 @@ export class TransformFilePathInterceptor<T> implements NestInterceptor<T, Respo
 		return next
 			.handle()
 			.pipe(map(data => {
-				console.log(data);
-				return data.map(items => ({ ...items, path: `${hostname}/${items.path}` }));
+				return data.map(items => (
+					{
+						...items,
+						path: `${hostname}/${items.path}`
+					}
+				));
 			}));
 	}
 }
