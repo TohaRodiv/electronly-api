@@ -27,7 +27,7 @@ import { TransformFilePathInterceptor } from "#common/interceptors/TransformFile
 	},
 })
 @ApiTags("Файлы")
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class FileController implements CrudController<File> {
 	constructor(
 		public service: FileService,

@@ -1,4 +1,5 @@
 import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
+import { TransformFilePathInterceptor } from "#common/interceptors/TransformFilePathInterceptor";
 import { Body, Controller, Param, Patch, Post, UseGuards } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { Crud, CrudController } from "@nestjsx/crud";
@@ -30,6 +31,12 @@ import { BlogUpdateCategoryDTO } from "./dto/BlogUpdateCategoryDTO";
 		],
 		deleteOneBase: {
 			returnDeleted: true,
+		},
+		getManyBase: {
+			interceptors: [new TransformFilePathInterceptor("images")],
+		},
+		getOneBase: {
+			interceptors: [new TransformFilePathInterceptor("images")]
 		},
 	},
 	dto: {

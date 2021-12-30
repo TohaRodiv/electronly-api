@@ -41,7 +41,7 @@ import { TransformFilePathInterceptor } from "#common/interceptors/TransformFile
 	}
 })
 @ApiTags("Категории магазина")
-@UseGuards(JwtAuthGuard)
+// @UseGuards(JwtAuthGuard)
 export class CategoryController implements CrudController<ShopCategory> {
 	constructor(
 		public service: CategoryService,

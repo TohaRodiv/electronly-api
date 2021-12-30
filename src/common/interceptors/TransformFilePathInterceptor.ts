@@ -18,27 +18,26 @@ export class TransformFilePathInterceptor<T> implements NestInterceptor<T, Respo
 		private readonly field: string = null,
 	) { }
 
-	private getFormattedFile(data: any, hostname) {
+	private getFormattedFile(entityFile: any, hostname: string) {
 		return {
-			...data,
-			path: `${hostname}/${data.path}`,
+			...entityFile,
+			path: `${hostname}/${entityFile.path}`,
 		};
 	}
 
-	private getFormattedFileByItemType(items: any) {
-		if (this.field && this.field in items) {
-			const result = items;
+	private getFormattedFileByItemType(entity: any) {
+		if (this.field && this.field in entity) {
+			const result = entity;
 
-			if (Array.isArray(result[this.field])) {
-				result[this.field] = result[this.field].map(file => this.getFormattedFile(file, hostname));
+			if (Array.isArray(entity[this.field])) {
+				result[this.field] = entity[this.field].map(file => this.getFormattedFile(file, hostname));
 			} else {
 				result[this.field] = this.getFormattedFile(result[this.field], hostname);
 			}
 
-			result[this.field] = this.getFormattedFile(items[this.field], hostname);
 			return result;
 		} else {
-			return this.getFormattedFile(items, hostname);
+			return this.getFormattedFile(entity, hostname);
 		}
 	}
 

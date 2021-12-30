@@ -1,4 +1,5 @@
 import { JwtAuthGuard } from "#common/guards/JwtAuthGuard";
+import { TransformFilePathInterceptor } from "#common/interceptors/TransformFilePathInterceptor";
 import { FileService } from "#modules/file/FileService";
 import { Body, Controller, Param, Patch, Post, UseGuards, } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
@@ -21,6 +22,12 @@ import { ProductService } from "./ProductService";
 		],
 		deleteOneBase: {
 			returnDeleted: true,
+		},
+		getManyBase: {
+			interceptors: [new TransformFilePathInterceptor("images")],
+		},
+		getOneBase: {
+			interceptors: [new TransformFilePathInterceptor("images")]
 		},
 	},
 	query: {
