@@ -16,14 +16,13 @@ export class Banner extends BaseEntity {
 	title: string;
 
 	@ApiProperty({ title: "Подзаголовок", })
-	@Column()
+	@Column({ default: "" })
 	@IsString()
 	subtitle: string;
 
 	@ApiProperty({ title: "Активен", })
 	@Column({ default: false })
 	@IsBoolean()
-	@IsOptional()
 	active: boolean;
 
 	@ApiProperty({ title: "Изображение", type: () => [File], format: "image", })
