@@ -5,7 +5,7 @@ import { File } from "#modules/file/File";
 import { ArrayItemNumberValidator } from "#common/validators/ArrayItemNumberValidator";
 
 export class CreateProductDTO {
-	@ApiProperty({ title: "Название", required: true, })
+	@ApiProperty({ title: "Наименование", required: true, })
 	@IsString()
 	name: string;
 
@@ -14,10 +14,20 @@ export class CreateProductDTO {
 	@IsOptional()
 	description: string;
 
+	@ApiProperty({ title: "Закупочная цена", required: false, default: null, })
+	@IsNumber()
+	@IsOptional()
+	purchase_price: number;
+
 	@ApiProperty({ title: "Цена", required: false, default: null, })
 	@IsNumber()
 	@IsOptional()
 	price: number;
+
+	@ApiProperty({ title: "Зачеркнутая цена", required: false, default: null, })
+	@IsNumber()
+	@IsOptional()
+	crossed_price: number;
 
 	@ApiProperty({ title: "Кол-во", default: null, required: false, })
 	@IsNumber()
