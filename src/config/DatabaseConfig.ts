@@ -3,7 +3,6 @@ import { BlogCategory } from "#modules/blog/category/BlogCategory";
 import { File } from "#modules/file/File";
 import { ShopCategory } from "#modules/shop/category/ShopCategory";
 import { Order } from "#modules/shop/order/Order";
-import { ProductImage } from "#modules/shop/product-image/ProductImage";
 import { Product } from "#modules/shop/product/Product";
 import { Banner } from "#modules/shop/promo/banner/Banner";
 import { StatusOrder } from "#modules/shop/status-order/StatusOrder";
@@ -28,7 +27,6 @@ export const DatabaseConfig: TypeOrmModuleOptions = {
 		Order,
 		Banner,
 		StatusOrder,
-		// ProductImage,
 		File,
 	],
 	migrations: [
