@@ -23,7 +23,7 @@ export class CreateOrderDTO {
 	@IsOptional()
 	comment?: string;
 
-	@ApiProperty({ title: "Товары", type: () => [Product], required: false,})
+	@ApiProperty({ title: "Товары", type: () => [Product], required: false, })
 	@Validate(ArrayItemNumberValidator)
 	@IsOptional()
 	products?: number[];
