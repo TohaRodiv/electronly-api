@@ -1,6 +1,6 @@
-import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from 'class-validator';
+import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments } from "class-validator";
 
-@ValidatorConstraint({ name: 'ArrayItemNumber', async: false })
+@ValidatorConstraint({ name: "ArrayItemNumber", async: false })
 export class ArrayItemNumberValidator implements ValidatorConstraintInterface {
   validate(arr: number[], args: ValidationArguments) {
     return Array.isArray(arr) && arr.filter(item => typeof item !== "number").length === 0;
