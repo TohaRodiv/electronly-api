@@ -34,6 +34,11 @@ export class CreateProductDTO {
 	@IsOptional()
 	count: number;
 
+	@ApiProperty({ title: "Наличие", default: true, })
+	@IsBoolean()
+	@IsOptional()
+	available: boolean;
+
 	@ApiProperty({ title: "Активен", default: true, required: false, })
 	@IsBoolean()
 	@IsOptional()
