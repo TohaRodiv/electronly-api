@@ -4,6 +4,7 @@ import {
 	SwaggerConfig,
 	JwtConfig,
 	FileStorageConfig,
+	TelegramAccountConfig,
 } from "#config";
 import { Injectable } from "@nestjs/common";
 
@@ -27,5 +28,9 @@ export class ConfigService {
 
 	public get fileStorage(): typeof FileStorageConfig {
 		return FileStorageConfig;
+	}
+
+	public get telegramAccount(): typeof TelegramAccountConfig {
+		return TelegramAccountConfig;
 	}
 }
