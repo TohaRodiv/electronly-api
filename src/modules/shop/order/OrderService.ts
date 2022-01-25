@@ -23,11 +23,11 @@ OrderService extends TypeOrmCrudService<Order> {
 		@Inject(StatusOrderService)
 		protected statusOrderService: StatusOrderService,
 
-		@Inject(NotificationService)
-		protected notificationService: NotificationService,
-
 		@Inject(TelegramService)
 		protected telegramService: TelegramService,
+
+		@Inject(NotificationService)
+		protected notificationService: NotificationService,
 	) {
 		super(repo);
 	}

@@ -13,8 +13,8 @@ import { OrderService } from "./OrderService";
 		TypeOrmModule.forFeature([Order]),
 		ProductModule,
 		StatusOrderModule,
-		NotificationModule,
 		TelegramModule,
+		NotificationModule,
 	],
 	providers: [
 		OrderService,
