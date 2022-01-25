@@ -1,3 +1,5 @@
+import { NotificationModule } from "#modules/notification/NotificationModule";
+import { TelegramModule } from "#modules/social/telegram/TelegramModule";
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ProductModule } from "../product/ProductModule";
@@ -11,6 +13,8 @@ import { OrderService } from "./OrderService";
 		TypeOrmModule.forFeature([Order]),
 		ProductModule,
 		StatusOrderModule,
+		NotificationModule,
+		TelegramModule,
 	],
 	providers: [
 		OrderService,
