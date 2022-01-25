@@ -15,7 +15,9 @@ export class TelegramService implements ISocialService {
 	
 	public async sendMessage(message: string): Promise<void> {
 		this.configService.telegramAccount.chatIds.forEach(chatId => {
-			this.bot.telegram.sendMessage(chatId, message);
+			this.bot.telegram.sendMessage(chatId, message, {
+				parse_mode: "HTML",
+			});
 		});
 	}
 }
