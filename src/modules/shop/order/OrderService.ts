@@ -100,17 +100,23 @@ OrderService extends TypeOrmCrudService<Order> {
 	protected async notificate(order: Order) {
 
 		const head = `Новая заявка №${order.id}`;
-		
+
 		let fioWithContacts = `<b>${order.fio ?? "(Клиент без имени)"}:</b> ${order.tel}`;
 		
 		if (order.email) {
 			fioWithContacts += `, ${order.email}`;	
 		}
 
-		let products = `\n<b>Товары:</b>`;
+		let products = "";
 
 		if (order.products.length > 0) {
-			products += order.products.map(product => (`${product.name} - ${product.price}`)).join(",")
+			products = `\n<b>Товары: </b>` + order.products.map(product => (`${product.name} - ${product.price}`)).join(",")
+		}
+
+		let comment = "";
+
+		if (order.comment) {
+			comment = `<b>Комментарий: </b>${order.comment}`;
 		}
 
 		this.notificationService.sendFormatMessage({
