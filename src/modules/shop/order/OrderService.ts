@@ -121,7 +121,7 @@ OrderService extends TypeOrmCrudService<Order> {
 
 		this.notificationService.sendFormatMessage({
 			head,
-			body: `${fioWithContacts}\n${products}`,
+			body: `${fioWithContacts}\n${products}\n${comment}`,
 		}, [this.telegramService]);
 	}
 }
