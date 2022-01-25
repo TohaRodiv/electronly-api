@@ -13,6 +13,6 @@ export class NotificationService {
 	}
 
 	public async sendFormatMessage(message: TFormatMessage, services: ISocialService[]): Promise<void> {
-		this.sendMessage(`<b>${message.head}</b>${message.body ?? ""}`, services);
+		this.sendMessage(`<b><u>${message.head}\n\n</u></b>${message.body ?? ""}`, services);
 	}
 }
