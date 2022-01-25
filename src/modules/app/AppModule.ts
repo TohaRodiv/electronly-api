@@ -9,7 +9,6 @@ import { FileModule } from "#modules/file/FileModule";
 import { AppService } from "./AppService";
 import { SocialModule } from "#modules/social/SocialModule";
 import { NotificationModule } from "#modules/notification/NotificationModule";
-import { AppController } from "./AppController";
 import { NotificationService } from "#modules/notification/NotificationService";
 import { TelegramService } from "#modules/social/telegram/TelegramService";
 
@@ -28,11 +27,8 @@ import { TelegramService } from "#modules/social/telegram/TelegramService";
 	exports: [],
 	providers: [
 		AppService,
-		NotificationService,
-		TelegramService,
 	],
 	controllers: [
-		AppController,
 	],
 })
 export class AppModule { }
