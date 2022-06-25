@@ -1,0 +1,52 @@
+version: "3.7"
+
+services:
+
+  server:
+    volumes:
+      - ./deploy/prod/nginx/config/:/etc/nginx/conf.d/
+      - ./deploy/prod/certbot/conf:/etc/letsencrypt
+      - ./deploy/prod/certbot/www:/var/www/certbot
+    ports:
+      - 80:80
+      - 443:443
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+  
+  certbot:
+    container_name: certbot
+    image: certbot/certbot
+    volumes:
+      - ./deploy/prod/certbot/conf:/etc/letsencrypt
+      - ./deploy/prod/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    networks:
+      app-network:
+    depends_on:
+      - server
+
+  db:
+    build:
+      context: ./
+      dockerfile: ./deploy/prod/postgres/Dockerfile
+    volumes:
+      - ./deploy/prod/postgres/pg-data/init-database:/docker-entrypoint-initdb.d
+      - ./deploy/prod/postgres/pg-data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d electronly"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: 1
+          memory: 500MB
+
+  app:
+    build:
+      context: ./
+      dockerfile: ./deploy/prod/app/Dockerfile
+    volumes:
+      - ./upload:/usr/app/upload

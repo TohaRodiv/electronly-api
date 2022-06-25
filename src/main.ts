@@ -14,17 +14,13 @@ import { NestExpressApplication } from "@nestjs/platform-express";
 
 	app.enableCors({
 		origin: true,
-		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+		methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
 		credentials: true,
-	  });
+	});
 
-	/**
-	 * TODO: Путь до папки upload брать из config-сервиса
-	 */
 	app.useStaticAssets(configService.fileStorage.destination);
 	app.use(configService.fileStorage.webUploadPath, staticExpress(configService.fileStorage.destination));
 	app.useStaticAssets(configService.fileStorage.destination);
-
 
 	app.useGlobalPipes(new ValidationPipe());
 

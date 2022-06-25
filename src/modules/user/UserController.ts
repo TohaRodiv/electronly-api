@@ -35,7 +35,7 @@ export class UserController implements CrudController<User> {
 	async updateOne (
 		@Param("id") id: number,
 		@Body() dto: UpdateUserDTO
-		): Promise<User> {
+	): Promise<User> {
 		return await this.service.update(id, dto);
 	}
 }

@@ -1,5 +1,5 @@
-import { DatabaseModule } from "#modules/database/DatabaseModule";
 import { Module } from "@nestjs/common";
+import { DatabaseModule } from "#modules/database/DatabaseModule";
 import { ConfigModule } from "#modules/config/ConfigModule";
 import { UserModule } from "#modules/user/UserModule";
 import { AuthModule } from "#modules/auth/AuthModule";

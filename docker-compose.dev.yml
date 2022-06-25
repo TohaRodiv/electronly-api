@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+
+  server:
+    volumes:
+      - ./deploy/dev/nginx/config/:/etc/nginx/conf.d/
+
+  db:
+    build:
+      context: ./
+      dockerfile: ./deploy/dev/postgres/Dockerfile
+    volumes:
+      - ./deploy/dev/postgres/pg-data/init-database:/docker-entrypoint-initdb.d
+      - ./deploy/dev/postgres/pg-data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: ./
+      dockerfile: ./deploy/dev/app/Dockerfile
+    volumes:
+      - .:/usr/app
+      - ./upload:/usr/app/upload

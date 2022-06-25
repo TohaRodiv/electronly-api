@@ -5,35 +5,14 @@ services:
   server:
     container_name: server
     image: nginx:alpine
-    volumes:
-      - ./deploy/nginx/config/:/etc/nginx/conf.d/
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
     ports:
       - 80:80
-      - 443:443
     restart: unless-stopped
     networks:
       app-network:
-    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
-  
-  certbot:
-    container_name: certbot
-    image: certbot/certbot
-    volumes:
-      - ./data/certbot/conf:/etc/letsencrypt
-      - ./data/certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-    networks:
-      app-network:
-    depends_on:
-      - server
 
   db:
     container_name: db
-    build:
-      context: ./
-      dockerfile: ./deploy/postgres/Dockerfile
     command:
       - "postgres"
       - "-c"
@@ -64,9 +43,6 @@ services:
       - "pg_stat_statements.max=10000"
       - "-c"
       - "pg_stat_statements.track=all"
-    volumes:
-      - ./deploy/postgres/pg-data/init-database:/docker-entrypoint-initdb.d
-      - ./deploy/postgres/pg-data:/var/lib/postgresql/data
     restart: unless-stopped
     ports:
       - 5432:5432
@@ -79,23 +55,8 @@ services:
     networks:
       app-network:
 
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d electronly"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 10s
-    deploy:
-      resources:
-        limits:
-          cpus: 1
-          memory: 500MB
-
   app:
     container_name: app
-    build:
-      context: ./
-      dockerfile: ./deploy/app/Dockerfile
     volumes:
       - .:/app
       - ./upload:/usr/app/upload

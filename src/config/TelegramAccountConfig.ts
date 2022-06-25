@@ -3,4 +3,4 @@ export const TelegramAccountConfig = {
 	chatIds: [
 		1061021304,
 	],
-}
+};
